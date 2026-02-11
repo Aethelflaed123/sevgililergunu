@@ -1,133 +1,4 @@
-[01:27, 12.02.2026] Emirhan: <!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Bir Mesajım Var ❤️</title>
-    <style>
-        /* GENEL AYARLAR */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-            background-color: #fdf2f2;
-        }
-
-        .page {
-            display: none; /* Sayfalar başlangıçta gizli */
-            height: 100vh;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 1s ease-in;
-        }
-
-        .active { display: flex; } /* Sadece aktif sayfa görünür */
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* 1. SAYFA STİLLERİ (GİRİŞ) */
-        #page1 {
-            background-color: #f89494;
-            justify-content: flex-start;
-        }
-        .main-heart-bg {
-            position: absolute;
-            right: -50px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 600px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.2);
-            clip-path: path('M300,150 C300,50 150,50 150,150 C150,250 300,350 300,450 C300,350 450,250 450,150 C450,50 300,50 300,150 Z');
-            border: 10px solid white;
-        }
-        .intro-content { margin-left: 10%; z-index: 2; color: white; margin-top: 20vh; }
-
-        /* 2. SAYFA STİLLERİ (MEKTUP) */
-        .letter-container {
-            background: #fffef0;
-            width: 80%;
-            max-width: 600px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 10px solid #f89494;
-        }
-
-        /* 3. SAYFA STİLLERİ (ZARF) */
-        .envelope-wrapper { position: relative; cursor: pointer; margin-bottom: 50px; }
-        .envelope { position: relative; width: 300px; height: 200px; background: #f89494; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; z-index: 1; }
-        .envelope::before { content: ""; position: absolute; top: 0; z-index: 2; border-top: 110px solid #f89494; border-left: 150px solid transparent; border-right: 150px solid transparent; transform-origin: top; transition: 0.5s; }
-        .letter-note { position: absolute; bottom: 0; left: 20px; width: 260px; height: 180px; background: white; padding: 15px; box-sizing: border-box; z-index: 0; transition: 0.7s; text-align: center; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .envelope-wrapper.active .letter-note { transform: translateY(-130px); z-index: 3; }
-        .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 0; }
-
-        /* BUTONLAR */
-        button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn-p1 { background: white; color: #f89494; }
-        .btn-p2 { background: #f89494; color: white; margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-    <div id="page1" class="page active">
-        <div class="main-heart-bg"></div>
-        <div class="intro-content">
-            <h1>Sevgilim,</h1>
-            <p>Sana söylemek istediğim bir şeyler var...</p>
-            <button class="btn-p1" onclick="showPage('page2')">Devam Et</button>
-        </div>
-    </div>
-
-    <div id="page2" class="page">
-        <div class="letter-container">
-            <div style="font-size: 1.2rem; line-height: 1.8; color: #444;">
-                Canım Sevgilim,<br><br>
-                Buraya senin için olan o uzun ve güzel mesajlarını ekleyebilirsin knk. 
-                Seninle her şey çok daha güzel...
-            </div>
-            <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
-        </div>
-    </div>
-
-    <div id="page3" class="page">
-        <div class="envelope-wrapper" onclick="this.classList.toggle('active')">
-            <div class="letter-note">
-                <i>"Sen bu dünyada uğruna savaşılacak en güzel şeysin nede olsa gözlerini parlatan şey için savaşmamak ne büyük korkaklık :)"</i>
-            </div>
-            <div class="envelope"></div>
-        </div>
-        <div style="text-align: center; color: #d81b60; font-weight: bold; padding: 20px;">
-            <p>Seni her evrende seviyorum sevgilim. İlk sevgililer günümüz ama asla son olmayacak. Günümüz kutlu olsun seni seviyorum 🤍🤍</p>
-            <div style="font-size: 2rem;">♾️</div>
-        </div>
-    </div>
-
-    <script>
-        function showPage(pageId) {
-            // Tüm sayfaları gizle
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // Seçilen sayfayı göster
-            document.getElementById(pageId).classList.add('active');
-        }
-    </script>
-</body>
-</html>
-[01:33, 12.02.2026] Emirhan: Ü
-[01:33, 12.02.2026] Emirhan: Ü
-[01:33, 12.02.2026] Emirhan: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -146,7 +17,7 @@
         }
 
         .page {
-            display: none; /* Sayfalar başlangıçta tamamen gizli */
+            display: none;
             width: 100%;
             height: 100vh;
             flex-direction: column;
@@ -158,7 +29,7 @@
         }
 
         .active { 
-            display: flex !important; /* Sadece aktif olan sayfa görünür */
+            display: flex !important;
             animation: fadeIn 0.8s ease-in-out;
         }
 
@@ -180,6 +51,10 @@
             background: #fffef0; width: 85%; max-width: 500px; padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid #f89494;
             text-align: left; border-radius: 4px;
+        }
+        .instruction-text {
+            color: #d81b60; font-size: 0.9rem; font-style: italic;
+            margin-top: 25px; margin-bottom: 5px; text-align: center;
         }
 
         /* 3. SAYFA (ZARF VE FİNAL) */
@@ -203,9 +78,9 @@
         /* BUTONLAR */
         button {
             padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer;
-            font-weight: bold; transition: 0.3s; margin-top: 20px;
+            font-weight: bold; transition: 0.3s;
         }
-        .btn-p1 { background: white; color: #f89494; }
+        .btn-p1 { background: white; color: #f89494; margin-top: 20px; }
         .btn-p2 { background: #f89494; color: white; align-self: center; }
     </style>
 </head>
@@ -224,9 +99,11 @@
         <div class="letter-container">
             <div style="font-size: 1.1rem; line-height: 1.6; color: #444;">
                 Canım Sevgilim,<br><br>
-                Seninle geçen her günüm, hayatımın en güzel sayfası. Bu mektup senin için... 
-                (Buraya istediğin o uzun notu ekle knk)
+                Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli. Seni her geçen gün daha çok seviyorum ve seninle daha nice güzel günlere yürümek istiyorum...
             </div>
+            
+            <div class="instruction-text">biradaki sayfada mektuba tıkla:)</div>
+            
             <div style="display: flex; justify-content: center;">
                 <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
             </div>
@@ -248,12 +125,10 @@
 
     <script>
         function showPage(pageId) {
-            // Tüm sayfaları tamamen gizle
             const pages = document.querySelectorAll('.page');
             pages.forEach(p => {
                 p.classList.remove('active');
             });
-            // Sadece istenen sayfayı aktif et
             document.getElementById(pageId).classList.add('active');
         }
     </script>
