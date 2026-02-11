@@ -19,39 +19,42 @@
         .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- 1. SAYFA: PARILTILI EFEKTLER (CSS) --- */
+        /* --- 1. SAYFA: PARILTILI YILDIZLAR (CSS) --- */
         .sparkle {
-            position: absolute; width: 10px; height: 10px; background: white;
-            border-radius: 50%; animation: twinkle 2s infinite ease-in-out; z-index: 5;
+            position: absolute; width: 15px; height: 15px; color: gold;
+            animation: twinkle 1.5s infinite ease-in-out; z-index: 5;
         }
         @keyframes twinkle { 
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 10px white; }
+            0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.3) rotate(180deg); text-shadow: 0 0 10px gold; }
         }
 
-        /* --- 2. SAYFA: UÇAN KALPLER (EMOJI + CSS) --- */
+        /* --- 2. SAYFA: UÇAN KALPLER (CSS + EMOJI) --- */
         .floating-heart {
-            position: absolute; bottom: -50px; font-size: 25px;
-            animation: heartFly 6s linear infinite; z-index: 1; opacity: 0.8;
+            position: absolute; bottom: -100px; font-size: 30px;
+            animation: heartFly 5s linear infinite; z-index: 1;
         }
         @keyframes heartFly {
-            to { transform: translateY(-110vh) translateX(40px) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- 3. SAYFA: KELEBEK EFEKTİ --- */
+        /* --- 3. SAYFA: UÇAN KELEBEKLER (CSS + EMOJI) --- */
         .butterfly-css {
-            position: absolute; font-size: 30px;
-            animation: butterflyMove 8s infinite linear; z-index: 5;
+            position: absolute; font-size: 35px;
+            animation: butterflyMove 10s infinite linear; z-index: 5;
         }
         @keyframes butterflyMove {
-            0% { top: 20%; left: -10%; }
-            50% { top: 50%; left: 110%; transform: scaleX(-1); }
-            100% { top: 20%; left: -10%; }
+            0% { top: 10%; left: -10%; transform: scaleX(1); }
+            45% { transform: scaleX(1); }
+            50% { top: 70%; left: 110%; transform: scaleX(-1); }
+            95% { transform: scaleX(-1); }
+            100% { top: 10%; left: -10%; transform: scaleX(1); }
         }
 
         /* TASARIM DETAYLARI */
         #page1 { background-color: #f89494; }
-        .intro-content { margin-left: 10%; color: white; z-index: 10; align-self: flex-start; }
+        .intro-content { margin-left: 10%; color: white; z-index: 10; align-self: flex-start; margin-top: 15vh; }
         .main-heart-bg {
             position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
             width: 450px; height: 450px; background: rgba(255, 255, 255, 0.2);
@@ -59,9 +62,9 @@
             border: 8px solid white;
         }
         .letter-container {
-            background: #fffef0; width: 85%; max-width: 500px; padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid #f89494;
-            border-radius: 4px; z-index: 2;
+            background: #fffef0; width: 85%; max-width: 500px; padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-left: 10px solid #f89494;
+            border-radius: 8px; z-index: 2; position: relative;
         }
         .envelope-wrapper { position: relative; cursor: pointer; height: 180px; width: 280px; margin-bottom: 60px; z-index: 10; }
         .envelope { position: absolute; width: 100%; height: 100%; background: #f89494; z-index: 2; border-radius: 0 0 10px 10px; }
@@ -72,23 +75,26 @@
         }
         .letter-note {
             position: absolute; bottom: 5px; left: 10px; width: 260px; height: 150px;
-            background: white; padding: 10px; z-index: 1; transition: 0.7s;
+            background: white; padding: 15px; z-index: 1; transition: 0.7s;
             display: flex; align-items: center; justify-content: center; font-style: italic;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 0.85rem; text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); font-size: 0.9rem; text-align: center; color: #444;
         }
-        .envelope-wrapper.active .letter-note { transform: translateY(-110px); z-index: 3; }
+        .envelope-wrapper.active .letter-note { transform: translateY(-120px); z-index: 3; }
         .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 1; }
-        button { padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; }
-        .btn-p1 { background: white; color: #f89494; margin-top: 20px; }
-        .btn-p2 { background: #f89494; color: white; margin-top: 15px; }
+        button { padding: 15px 35px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-p1 { background: white; color: #f89494; margin-top: 25px; }
+        .btn-p2 { background: #f89494; color: white; margin-top: 20px; }
+        button:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
     <div id="page1" class="page active">
-        <div class="sparkle" style="top:10%; left:20%;"></div>
-        <div class="sparkle" style="top:40%; left:5%;"></div>
-        <div class="sparkle" style="bottom:20%; left:15%;"></div>
+        <span class="sparkle" style="top:10%; left:10%;">✨</span>
+        <span class="sparkle" style="top:30%; right:20%;">⭐</span>
+        <span class="sparkle" style="bottom:20%; left:15%;">✨</span>
+        <span class="sparkle" style="bottom:40%; right:5%;">⭐</span>
+        
         <div class="main-heart-bg"></div>
         <div class="intro-content">
             <h1>Sevgilim,</h1>
@@ -98,15 +104,18 @@
     </div>
 
     <div id="page2" class="page">
-        <div class="floating-heart" style="left:10%; animation-delay:0s;">❤️</div>
-        <div class="floating-heart" style="left:40%; animation-delay:2s;">💖</div>
-        <div class="floating-heart" style="left:80%; animation-delay:1s;">💗</div>
+        <div class="floating-heart" style="left:5%; animation-delay:0s;">❤️</div>
+        <div class="floating-heart" style="left:25%; animation-delay:2s;">💖</div>
+        <div class="floating-heart" style="left:50%; animation-delay:1s;">💗</div>
+        <div class="floating-heart" style="left:75%; animation-delay:3s;">❤️</div>
+        <div class="floating-heart" style="left:90%; animation-delay:0.5s;">💖</div>
+
         <div class="letter-container">
-            <div style="font-size: 1.1rem; line-height: 1.6; color: #444;">
+            <div style="font-size: 1.15rem; line-height: 1.8; color: #444;">
                 Canım Sevgilim,<br><br>
                 Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli...
             </div>
-            <div style="color: #d81b60; font-size: 0.9rem; font-style: italic; margin-top: 20px; text-align: center;">biradaki sayfada mektuba tıkla:)</div>
+            <div style="color: #d81b60; font-size: 0.95rem; font-style: italic; margin-top: 25px; text-align: center;">biradaki sayfada mektuba tıkla:)</div>
             <div style="display: flex; justify-content: center;">
                 <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
             </div>
@@ -115,7 +124,8 @@
 
     <div id="page3" class="page">
         <div class="butterfly-css" style="animation-delay: 0s;">🦋</div>
-        <div class="butterfly-css" style="animation-delay: 4s;">🦋</div>
+        <div class="butterfly-css" style="animation-delay: 5s;">🦋</div>
+
         <div class="envelope-wrapper" onclick="this.classList.toggle('active')">
             <div class="letter-note">
                 "Sen bu dünyada uğruna savaşılacak en güzel şeysin nede olsa gözlerini parlatan şey için savaşmamak ne büyük korkaklık :)"
@@ -123,8 +133,8 @@
             <div class="envelope"></div>
         </div>
         <div style="text-align: center; color: #d81b60; font-weight: bold; padding: 0 20px; z-index: 10;">
-            <p>Seni her evrende seviyorum sevgilim. İlk sevgililer günümüz ama asla son olmayacak günümüz kutlu olsun seni seviyorum 🤍🤍</p>
-            <div style="font-size: 2rem;">♾️</div>
+            <p style="font-size: 1.1rem; line-height: 1.6;">Seni her evrende seviyorum sevgilim. İlk sevgililer günümüz ama asla son olmayacak günümüz kutlu olsun seni seviyorum 🤍🤍</p>
+            <div style="font-size: 2.5rem; margin-top: 10px;">♾️</div>
         </div>
     </div>
 
