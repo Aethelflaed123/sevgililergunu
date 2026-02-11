@@ -5,77 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sana Bir Mesajım Var ❤️</title>
     <style>
-        /* GENEL AYARLAR */
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-            background-color: #fdf2f2;
+            margin: 0; padding: 0; width: 100%; height: 100vh;
+            font-family: 'Georgia', serif; overflow: hidden; background-color: #fdf2f2;
         }
 
         .page {
-            display: none;
-            width: 100%;
-            height: 100vh;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
+            display: none; width: 100%; height: 100vh;
+            flex-direction: column; align-items: center; justify-content: center;
+            position: absolute; top: 0; left: 0;
         }
 
-        .active { 
-            display: flex !important;
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
+        .active { display: flex !important; animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- 1. SAYFA (GIF'LER) --- */
-        #page1 { background-color: #f89494; justify-content: center; align-items: flex-start; }
-        .gif-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        /* --- 1. SAYFA GIF'LERİ --- */
+        .gif-overlay {
+            position: absolute; width: 120px; height: 120px; pointer-events: none; z-index: 5;
         }
-        /* Köşelere romantik gifler (temsili emoji/animasyon olarak ekledim) */
-        .corner-gif { position: absolute; font-size: 50px; animation: floating 3s infinite ease-in-out; }
-        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* --- 2. SAYFA (UÇAN KALP BALONLAR) --- */
+        /* --- 2. SAYFA BALONLAR --- */
         .balloon {
-            position: absolute;
-            bottom: -100px;
-            font-size: 30px;
-            animation: flyUp 6s linear infinite;
-            z-index: 0;
+            position: absolute; bottom: -150px; width: 60px;
+            animation: flyUp 7s linear infinite; z-index: 1;
         }
         @keyframes flyUp {
-            to { transform: translateY(-110vh) translateX(50px); opacity: 0; }
+            to { transform: translateY(-120vh) translateX(100px); opacity: 0; }
         }
 
-        /* --- 3. SAYFA (KELEBEKLER) --- */
-        .butterfly {
-            position: absolute;
-            font-size: 25px;
-            animation: flutter 4s infinite linear;
-            z-index: 5;
+        /* --- 3. SAYFA KELEBEKLER --- */
+        .butterfly-gif {
+            position: absolute; width: 80px; height: 80px;
+            animation: flutterAround 10s infinite linear; z-index: 5;
         }
-        @keyframes flutter {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(100px, -50px) rotate(20deg); }
-            50% { transform: translate(200px, 0px) rotate(-20deg); }
-            75% { transform: translate(100px, 50px) rotate(10deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+        @keyframes flutterAround {
+            0% { top: 10%; left: 10%; }
+            25% { top: 50%; left: 80%; transform: rotate(45deg); }
+            50% { top: 80%; left: 40%; transform: rotate(-45deg); }
+            75% { top: 30%; left: 20%; transform: rotate(90deg); }
+            100% { top: 10%; left: 10%; }
         }
 
-        /* DİĞER STİLLER (AYNI KALDI) */
-        .intro-content { margin-left: 10%; color: white; z-index: 2; }
+        /* DİĞER SABİT STİLLER */
+        #page1 { background-color: #f89494; }
+        .intro-content { margin-left: 10%; color: white; z-index: 10; align-self: flex-start; margin-top: 20vh; }
         .main-heart-bg {
             position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
             width: 500px; height: 500px; background: rgba(255, 255, 255, 0.2);
@@ -87,7 +60,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid #f89494;
             text-align: left; border-radius: 4px; z-index: 2;
         }
-        .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 100px; z-index: 10; }
+        .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 80px; z-index: 10; }
         .envelope { position: absolute; width: 300px; height: 200px; background: #f89494; z-index: 2; border-radius: 0 0 10px 10px; }
         .envelope::before {
             content: ""; position: absolute; top: 0; z-index: 4;
@@ -98,23 +71,21 @@
             position: absolute; bottom: 5px; left: 15px; width: 270px; height: 170px;
             background: white; padding: 15px; z-index: 1; transition: 0.7s;
             display: flex; align-items: center; justify-content: center; font-style: italic;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 0.9rem; border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); font-size: 0.9rem; border: 1px solid #eee; text-align: center;
         }
         .envelope-wrapper.active .letter-note { transform: translateY(-130px); z-index: 3; }
         .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 1; }
         button { padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; z-index: 10; }
         .btn-p1 { background: white; color: #f89494; margin-top: 20px; }
-        .btn-p2 { background: #f89494; color: white; align-self: center; }
+        .btn-p2 { background: #f89494; color: white; align-self: center; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div id="page1" class="page active">
-        <div class="gif-container">
-            <span class="corner-gif" style="top:10%; left:5%;">✨</span>
-            <span class="corner-gif" style="bottom:10%; left:20%;">💖</span>
-            <span class="corner-gif" style="top:20%; right:10%;">🎀</span>
-        </div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKoWXlo3M1nKS6A/giphy.gif" class="gif-overlay" style="top:5%; left:5%;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/Lp71UqhzA2SqvFkXvB/giphy.gif" class="gif-overlay" style="bottom:10%; right:10%;">
+        
         <div class="main-heart-bg"></div>
         <div class="intro-content">
             <h1>Sevgilim,</h1>
@@ -124,27 +95,24 @@
     </div>
 
     <div id="page2" class="page">
-        <div class="balloon" style="left:10%; animation-delay:0s;">🎈❤️</div>
-        <div class="balloon" style="left:30%; animation-delay:2s;">🎈💖</div>
-        <div class="balloon" style="left:70%; animation-delay:1s;">🎈❤️</div>
-        <div class="balloon" style="left:85%; animation-delay:3s;">🎈💖</div>
-        
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKoWXlo3M1nKS6A/giphy.gif" class="balloon" style="left:5%; animation-delay:0s;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKoWXlo3M1nKS6A/giphy.gif" class="balloon" style="left:40%; animation-delay:2s;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKoWXlo3M1nKS6A/giphy.gif" class="balloon" style="right:10%; animation-delay:4s;">
+
         <div class="letter-container">
             <div style="font-size: 1.1rem; line-height: 1.6; color: #444;">
                 Canım Sevgilim,<br><br>
                 Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli...
             </div>
             <div style="color: #d81b60; font-size: 0.9rem; font-style: italic; margin-top: 25px; text-align: center;">biradaki sayfada mektuba tıkla:)</div>
-            <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <div style="display: flex; justify-content: center;">
                 <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
             </div>
         </div>
     </div>
 
     <div id="page3" class="page">
-        <div class="butterfly" style="top:20%; left:10%;">🦋</div>
-        <div class="butterfly" style="top:50%; right:20%; animation-delay:1s;">🦋</div>
-        <div class="butterfly" style="bottom:20%; left:30%; animation-delay:2s;">🦋</div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bmhicjF6ZzR0amZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKoWXlo3M1nKS6A/giphy.gif" class="butterfly-gif">
 
         <div class="envelope-wrapper" onclick="this.classList.toggle('active')">
             <div class="letter-note">
