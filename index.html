@@ -35,8 +35,46 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 1. SAYFA (GİRİŞ) */
+        /* --- 1. SAYFA (GIF'LER) --- */
         #page1 { background-color: #f89494; justify-content: center; align-items: flex-start; }
+        .gif-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        /* Köşelere romantik gifler (temsili emoji/animasyon olarak ekledim) */
+        .corner-gif { position: absolute; font-size: 50px; animation: floating 3s infinite ease-in-out; }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- 2. SAYFA (UÇAN KALP BALONLAR) --- */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            font-size: 30px;
+            animation: flyUp 6s linear infinite;
+            z-index: 0;
+        }
+        @keyframes flyUp {
+            to { transform: translateY(-110vh) translateX(50px); opacity: 0; }
+        }
+
+        /* --- 3. SAYFA (KELEBEKLER) --- */
+        .butterfly {
+            position: absolute;
+            font-size: 25px;
+            animation: flutter 4s infinite linear;
+            z-index: 5;
+        }
+        @keyframes flutter {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(20deg); }
+            50% { transform: translate(200px, 0px) rotate(-20deg); }
+            75% { transform: translate(100px, 50px) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* DİĞER STİLLER (AYNI KALDI) */
         .intro-content { margin-left: 10%; color: white; z-index: 2; }
         .main-heart-bg {
             position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
@@ -44,22 +82,12 @@
             clip-path: path('M250,125 C250,40 125,40 125,125 C125,210 250,290 250,375 C250,290 375,210 375,125 C375,40 250,40 250,125 Z');
             border: 8px solid white;
         }
-
-        /* 2. SAYFA (MEKTUP) */
-        #page2 { background-color: #fdf2f2; }
         .letter-container {
             background: #fffef0; width: 85%; max-width: 500px; padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid #f89494;
-            text-align: left; border-radius: 4px;
+            text-align: left; border-radius: 4px; z-index: 2;
         }
-        .instruction-text {
-            color: #d81b60; font-size: 0.9rem; font-style: italic;
-            margin-top: 25px; margin-bottom: 5px; text-align: center;
-        }
-
-        /* 3. SAYFA (ZARF VE FİNAL) */
-        #page3 { background-color: #fdf2f2; }
-        .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 100px; }
+        .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 100px; z-index: 10; }
         .envelope { position: absolute; width: 300px; height: 200px; background: #f89494; z-index: 2; border-radius: 0 0 10px 10px; }
         .envelope::before {
             content: ""; position: absolute; top: 0; z-index: 4;
@@ -74,12 +102,7 @@
         }
         .envelope-wrapper.active .letter-note { transform: translateY(-130px); z-index: 3; }
         .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 1; }
-
-        /* BUTONLAR */
-        button {
-            padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer;
-            font-weight: bold; transition: 0.3s;
-        }
+        button { padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; z-index: 10; }
         .btn-p1 { background: white; color: #f89494; margin-top: 20px; }
         .btn-p2 { background: #f89494; color: white; align-self: center; }
     </style>
@@ -87,6 +110,11 @@
 <body>
 
     <div id="page1" class="page active">
+        <div class="gif-container">
+            <span class="corner-gif" style="top:10%; left:5%;">✨</span>
+            <span class="corner-gif" style="bottom:10%; left:20%;">💖</span>
+            <span class="corner-gif" style="top:20%; right:10%;">🎀</span>
+        </div>
         <div class="main-heart-bg"></div>
         <div class="intro-content">
             <h1>Sevgilim,</h1>
@@ -96,28 +124,35 @@
     </div>
 
     <div id="page2" class="page">
+        <div class="balloon" style="left:10%; animation-delay:0s;">🎈❤️</div>
+        <div class="balloon" style="left:30%; animation-delay:2s;">🎈💖</div>
+        <div class="balloon" style="left:70%; animation-delay:1s;">🎈❤️</div>
+        <div class="balloon" style="left:85%; animation-delay:3s;">🎈💖</div>
+        
         <div class="letter-container">
             <div style="font-size: 1.1rem; line-height: 1.6; color: #444;">
                 Canım Sevgilim,<br><br>
-                Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli. Seni her geçen gün daha çok seviyorum ve seninle daha nice güzel günlere yürümek istiyorum...
+                Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli...
             </div>
-            
-            <div class="instruction-text">biradaki sayfada mektuba tıkla:)</div>
-            
-            <div style="display: flex; justify-content: center;">
+            <div style="color: #d81b60; font-size: 0.9rem; font-style: italic; margin-top: 25px; text-align: center;">biradaki sayfada mektuba tıkla:)</div>
+            <div style="display: flex; justify-content: center; margin-top: 10px;">
                 <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
             </div>
         </div>
     </div>
 
     <div id="page3" class="page">
+        <div class="butterfly" style="top:20%; left:10%;">🦋</div>
+        <div class="butterfly" style="top:50%; right:20%; animation-delay:1s;">🦋</div>
+        <div class="butterfly" style="bottom:20%; left:30%; animation-delay:2s;">🦋</div>
+
         <div class="envelope-wrapper" onclick="this.classList.toggle('active')">
             <div class="letter-note">
                 "Sen bu dünyada uğruna savaşılacak en güzel şeysin nede olsa gözlerini parlatan şey için savaşmamak ne büyük korkaklık :)"
             </div>
             <div class="envelope"></div>
         </div>
-        <div style="text-align: center; color: #d81b60; font-weight: bold; padding: 0 20px;">
+        <div style="text-align: center; color: #d81b60; font-weight: bold; padding: 0 20px; z-index: 10;">
             <p>Seni her evrende seviyorum sevgilim. İlk sevgililer günümüz ama asla son olmayacak günümüz kutlu olsun seni seviyorum 🤍🤍</p>
             <div style="font-size: 2rem;">♾️</div>
         </div>
@@ -126,9 +161,7 @@
     <script>
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
-            pages.forEach(p => {
-                p.classList.remove('active');
-            });
+            pages.forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
     </script>
