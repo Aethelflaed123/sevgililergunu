@@ -11,7 +11,7 @@
         .active { display: flex !important; animation: fadeIn 1.2s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- 1. SAYFA: GÖZ KAMAŞTIRICI VE HAREKETLİ --- */
+        /* --- 1. SAYFA: HAREKETLİ GRADIENT --- */
         #page1 { 
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
@@ -24,51 +24,61 @@
             100% { background-position: 0% 50%; }
         }
 
-        .intro-content { z-index: 10; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.5); }
-        .intro-content h1 { font-size: 4.5rem; font-family: 'Brush Script MT', cursive; margin: 0; }
-        .intro-content p { font-size: 1.5rem; letter-spacing: 2px; font-style: italic; margin-top: 10px; }
+        /* --- 2. SAYFA: GÖZ ALICI MEKTUP TASARIMI --- */
+        #page2 {
+            background: linear-gradient(135deg, #fff1f1 0%, #ffd1d1 100%);
+            position: relative;
+        }
 
-        .sparkle { position: absolute; color: #fff; font-size: 20px; animation: twinkle 2s infinite ease-in-out; z-index: 5; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.8); filter: blur(1px); } }
-
-        /* --- 2. SAYFA: FOTOĞRAFLAR VE MEKTUP --- */
         .photo-heart {
             position: absolute; width: 180px; height: 180px;
             background-size: cover; background-position: center;
             border: 6px solid white; z-index: 5;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(231, 60, 126, 0.3);
             clip-path: url(#heart-clip);
+            animation: floatPhoto 4s infinite ease-in-out;
         }
-        .top-right { top: 30px; right: 30px; transform: rotate(10deg); }
-        .bottom-left { bottom: 30px; left: 30px; transform: rotate(-10deg); }
+        @keyframes floatPhoto {
+            0%, 100% { transform: translateY(0) rotate(10deg); }
+            50% { transform: translateY(-15px) rotate(12deg); }
+        }
+        .top-right { top: 30px; right: 30px; }
+        .bottom-left { bottom: 30px; left: 30px; transform: rotate(-10deg) !important; animation: floatPhotoLeft 4.5s infinite ease-in-out; }
+        @keyframes floatPhotoLeft {
+            0%, 100% { transform: translateY(0) rotate(-10deg); }
+            50% { transform: translateY(-15px) rotate(-12deg); }
+        }
 
         .letter-container { 
-            background: #fffef0; width: 85%; max-width: 520px; padding: 40px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2); border-left: 12px solid #f89494; 
-            border-radius: 15px; z-index: 2; position: relative;
+            background: rgba(255, 254, 240, 0.95); width: 85%; max-width: 520px; padding: 40px; 
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15); border-left: 12px solid #e73c7e; 
+            border-radius: 20px; z-index: 2; position: relative;
+            backdrop-filter: blur(5px);
+            transform: perspective(1000px) rotateX(2deg);
         }
+
+        /* Uçuşan Kalp Efektleri */
+        .floating-heart { position: absolute; bottom: -100px; font-size: 30px; animation: heartFly 6s linear infinite; opacity: 0.6; pointer-events: none; }
+        @keyframes heartFly { to { transform: translateY(-110vh) translateX(50px) rotate(360deg); opacity: 0; } }
 
         /* --- 3. SAYFA: ZARF VE FINAL --- */
         .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 60px; z-index: 10; }
-        .envelope { position: absolute; width: 100%; height: 100%; background: #f89494; z-index: 2; border-radius: 0 0 10px 10px; }
-        .envelope::before { content: ""; position: absolute; top: 0; z-index: 4; border-top: 110px solid #f89494; border-left: 150px solid transparent; border-right: 150px solid transparent; transform-origin: top; transition: 0.5s; }
-        .letter-note { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; padding: 20px; z-index: 1; transition: 0.7s; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.95rem; text-align: center; color: #444; border: 1px solid #eee; }
+        .envelope { position: absolute; width: 100%; height: 100%; background: #e73c7e; z-index: 2; border-radius: 0 0 10px 10px; }
+        .envelope::before { content: ""; position: absolute; top: 0; z-index: 4; border-top: 110px solid #e73c7e; border-left: 150px solid transparent; border-right: 150px solid transparent; transform-origin: top; transition: 0.5s; }
+        .letter-note { position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; background: white; padding: 20px; z-index: 1; transition: 0.7s; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.95rem; text-align: center; color: #444; }
         .envelope-wrapper.active .letter-note { transform: translateY(-140px); z-index: 3; }
         .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 1; }
 
         /* BUTONLAR */
-        button { 
-            padding: 18px 40px; border: none; border-radius: 50px; cursor: pointer; 
-            font-weight: bold; transition: 0.4s; font-size: 1.1rem; 
-        }
+        button { padding: 18px 40px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.4s; font-size: 1.1rem; }
         .btn-p1 { background: white; color: #e73c7e; margin-top: 40px; animation: pulse 2s infinite; }
-        .btn-p2 { background: #f89494; color: white; margin-top: 30px; }
-        button:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(255,255,255,0.4); }
+        .btn-p2 { background: linear-gradient(90deg, #e73c7e, #ee7752); color: white; margin-top: 30px; width: 100%; box-shadow: 0 10px 20px rgba(231, 60, 126, 0.3); }
+        button:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
 
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
 
-        .canva-link { margin-top: 15px; color: #d81b60; text-decoration: none; font-weight: bold; border: 2px solid #d81b60; padding: 10px 20px; border-radius: 25px; font-size: 0.85rem; transition: 0.3s; }
-        .canva-link:hover { background: #d81b60; color: white; }
+        .canva-link { margin-top: 15px; color: #e73c7e; text-decoration: none; font-weight: bold; border: 2px solid #e73c7e; padding: 10px 20px; border-radius: 25px; font-size: 0.85rem; transition: 0.3s; }
+        .canva-link:hover { background: #e73c7e; color: white; }
     </style>
 </head>
 <body>
@@ -82,26 +92,28 @@
     </svg>
 
     <div id="page1" class="page active">
-        <span class="sparkle" style="top:15%; left:15%;">✨</span>
-        <span class="sparkle" style="top:25%; right:20%;">💖</span>
-        <span class="sparkle" style="bottom:30%; left:25%;">⭐</span>
         <div class="intro-content">
-            <h1>Sevgilim,</h1>
-            <p>Sana söylemek istediğim bir şeyler var...</p>
+            <h1 style="font-size: 4.5rem; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.5);">Sevgilim,</h1>
+            <p style="color: white; font-style: italic; opacity: 0.9;">Sana söylemek istediğim bir şeyler var...</p>
             <button class="btn-p1" onclick="showPage('page2')">Hemen Başla ✨</button>
         </div>
     </div>
 
     <div id="page2" class="page">
+        <div class="floating-heart" style="left:5%; animation-delay:0s;">❤️</div>
+        <div class="floating-heart" style="left:20%; animation-delay:2s;">💖</div>
+        <div class="floating-heart" style="left:50%; animation-delay:1s;">💗</div>
+        <div class="floating-heart" style="left:80%; animation-delay:3s;">❤️</div>
+
         <div class="photo-heart top-right" style="background-image: url('foto1.jpg');"></div>
-        <div class="bottom-left photo-heart" style="background-image: url('foto2.jpg');"></div>
+        <div class="photo-heart bottom-left" style="background-image: url('foto2.jpg');"></div>
         
         <div class="letter-container">
-            <div style="font-size: 1.2rem; line-height: 1.8; color: #444;">
+            <div style="font-size: 1.25rem; line-height: 1.8; color: #444; font-family: 'Times New Roman', serif;">
                 Canım Sevgilim,<br><br>
                 Seninle geçen her günüm hayatımın en güzel parçası. Bu ilk sevgililer günümüzde yanında olmak, seninle bu anıları biriktirmek benim için çok kıymetli. Seni her geçen gün daha çok seviyorum...
             </div>
-            <p style="color: #d81b60; font-size: 1rem; font-style: italic; text-align: center; margin-top: 30px;">birdahaki sayfada mektuba tıkla:)</p>
+            <p style="color: #e73c7e; font-size: 1rem; font-style: italic; text-align: center; margin-top: 30px; font-weight: bold;">birdahaki sayfada mektuba tıkla:)</p>
             <div style="display: flex; justify-content: center;">
                 <button class="btn-p2" onclick="showPage('page3')">Seni her zaman seviyorum ❤️</button>
             </div>
@@ -118,7 +130,7 @@
             </div>
             <div class="envelope"></div>
         </div>
-        <div style="text-align: center; color: #d81b60; font-weight: bold; padding: 0 20px;">
+        <div style="text-align: center; color: #e73c7e; font-weight: bold; padding: 0 20px;">
             <p>Seni her evrende seviyorum sevgilim. İlk sevgililer günümüz ama asla son olmayacak günümüz kutlu olsun seni seviyorum 🤍🤍</p>
             <div style="font-size: 3rem; margin-top: 10px;">♾️</div>
         </div>
