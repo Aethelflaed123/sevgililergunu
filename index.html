@@ -27,7 +27,7 @@
         #page2 { background: radial-gradient(circle, #fff0f0 0%, #ffd6d6 100%); }
 
         .photo-heart {
-            position: absolute; width: 220px; height: 220px; /* Fotoğraflar BÜYÜK */
+            position: absolute; width: 220px; height: 220px; 
             background-size: cover; background-position: center;
             border: 8px solid white; z-index: 5;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
@@ -49,21 +49,33 @@
         /* --- 3. SAYFA --- */
         #page3 { 
             background: linear-gradient(to bottom, #2b1055, #7597de); 
-            color: white; overflow: hidden; /* Taşmaları gizle */
+            color: white; overflow: hidden;
+            justify-content: flex-end; /* İçeriği biraz aşağı itmek için */
+            padding-bottom: 50px; /* Alttan boşluk */
         }
 
-        .envelope-wrapper { position: relative; cursor: pointer; height: 200px; width: 300px; margin-bottom: 80px; z-index: 10; }
+        /* Zarfı saran kutuyu biraz aşağı aldık (margin-top ile) */
+        .envelope-wrapper { 
+            position: relative; cursor: pointer; height: 200px; width: 300px; 
+            margin-bottom: 50px; /* Alt boşluk */
+            margin-top: 50px;    /* Üstten boşluk (kafası çarpmasın diye) */
+            z-index: 10; 
+        }
+        
         .envelope { position: absolute; width: 100%; height: 100%; background: #ff416c; z-index: 2; border-radius: 0 0 10px 10px; box-shadow: 0 0 20px rgba(255, 65, 108, 0.5); }
         .envelope::before { content: ""; position: absolute; top: 0; z-index: 4; border-top: 110px solid #ff4b2b; border-left: 150px solid transparent; border-right: 150px solid transparent; transform-origin: top; transition: 0.5s; }
         
         .letter-note { 
-            position: absolute; bottom: 5px; left: 15px; width: 270px; height: 180px; 
+            position: absolute; bottom: 5px; left: 15px; width: 270px; height: 190px; /* Notu biraz uzattık */
             background: white; color: #333; padding: 15px; z-index: 1; transition: 0.8s; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; /* Yazıyı yukarı yasla */
+            padding-top: 30px; /* Üstten biraz boşluk */
+            text-align: center;
             border-radius: 5px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
         }
         
-        .envelope-wrapper.active .letter-note { transform: translateY(-160px); z-index: 3; }
+        /* Notun yukarı çıkma mesafesini ayarladık: -120px (Çok uçmasın diye) */
+        .envelope-wrapper.active .letter-note { transform: translateY(-120px); z-index: 3; }
         .envelope-wrapper.active .envelope::before { transform: rotateX(180deg); z-index: 1; }
 
         /* BUTONLAR */
@@ -71,7 +83,6 @@
         .btn-p1 { padding: 20px 50px; background: white; color: #ff416c; border-radius: 50px; font-size: 1.3rem; animation: pulse 1.5s infinite; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .btn-p2 { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff416c, #ff4b2b); color: white; border-radius: 30px; font-size: 1.1rem; margin-top: 25px; }
         
-        /* Canva Link Butonu */
         .canva-btn {
             margin-top: 15px;
             background: #ff416c; color: white; text-decoration: none; 
@@ -85,7 +96,7 @@
             position: absolute;
             font-size: 2rem;
             animation: explode 1.5s ease-out forwards;
-            z-index: 9999; /* En üstte */
+            z-index: 9999;
             pointer-events: none;
         }
         @keyframes explode {
@@ -138,7 +149,7 @@
     <div id="page3" class="page">
         <div class="envelope-wrapper" onclick="openEnvelope(this)">
             <div class="letter-note">
-                <p style="font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">
+                <p style="font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.4;">
                     "Sen bu dünyada uğruna savaşılacak en güzel şeysin nede olsa gözlerini parlatan şey için savaşmamak ne büyük korkaklık :)"
                 </p>
                 <a href="https://ulıoıuoıupouı.my.canva.site/kian-louie" target="_blank" class="canva-btn">
@@ -148,11 +159,11 @@
             <div class="envelope"></div>
         </div>
         
-        <div style="text-align: center; color: white; padding: 0 20px; z-index: 10;">
+        <div style="text-align: center; color: white; padding: 0 20px; z-index: 10; margin-bottom: 50px;">
             <p style="font-size: 1.2rem; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.5);">
                 Seni her evrende seviyorum sevgilim. <br>İlk sevgililer günümüz ama asla son olmayacak... <br>Seni seviyorum 🤍🤍
             </p>
-            <div style="font-size: 4rem; margin-top: 20px; display: inline-block; animation: infiniteRotate 10s linear infinite;">♾️</div>
+            <div style="font-size: 4rem; margin-top: 10px; display: inline-block; animation: infiniteRotate 10s linear infinite;">♾️</div>
         </div>
     </div>
 
@@ -162,12 +173,9 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // KALP PATLAMASI FONKSİYONU
+        // KALP PATLAMASI
         function openEnvelope(element) {
-            // Zarfı aç
             element.classList.toggle('active');
-
-            // Eğer zarf açılıyorsa patlamayı yap
             if (element.classList.contains('active')) {
                 createHeartExplosion();
             }
@@ -175,30 +183,17 @@
 
         function createHeartExplosion() {
             const colors = ['❤️', '💖', '💗', '💓', '💞'];
-            
-            // 150 tane kalp oluştur (Ekranı kaplaması için)
             for (let i = 0; i < 150; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('explosion-heart');
                 heart.innerText = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Rastgele konum (Ekranın her yerine dağılması için)
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = Math.random() * 100 + 'vh';
-                
-                // Rastgele boyut
-                const size = Math.random() * 2 + 1; // 1rem ile 3rem arası
+                const size = Math.random() * 2 + 1; 
                 heart.style.fontSize = size + 'rem';
-                
-                // Rastgele animasyon süresi
-                heart.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // 0.5s ile 1.5s arası
-                
+                heart.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
                 document.body.appendChild(heart);
-
-                // Temizlik (Animasyon bitince sil)
-                setTimeout(() => {
-                    heart.remove();
-                }, 1500);
+                setTimeout(() => { heart.remove(); }, 1500);
             }
         }
     </script>
